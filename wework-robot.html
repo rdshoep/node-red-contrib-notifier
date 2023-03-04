@@ -1,0 +1,48 @@
+<script type="text/html" data-template-name="wework-robot">
+    <div class="form-row">
+        <label for="node-input-key"><i class="fa fa-tag"></i> RobotKey</label>
+        <input type="text" id="node-input-key" placeholder="RobotKey">
+    </div>
+    <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-tag"></i> Property</label>
+        <input type="text" id="node-input-property" placeholder="Property">
+        <input type="hidden" id="node-input-property-type">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('wework-robot',{
+        defaults: {
+            key: {
+                value: '',
+                validate: RED.validators.regex(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/)
+            },
+            property: {
+                value: 'notify'
+            },
+            propertyType: {
+                value: 'msg'
+            }
+        },
+        credentials: {
+            key: {type: 'text'},
+        },
+        category: 'function',
+        color: '#338CFF',
+        label: 'wework-robot',
+        icon: 'wework.svg',
+        inputs: 1,
+        outputs: 1,
+        oneditprepare: function() {
+            $("#node-input-property").typedInput({
+                type:"msg",
+                types:["msg"],
+                typeField: "#node-input-property-type"
+            })
+        }
+    });
+</script>
+
+<script type="text/html" data-help-name="wework-robot">
+
+</script>
